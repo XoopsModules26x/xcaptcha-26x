@@ -16,28 +16,31 @@
  * @version         $Id$
  */
 
+use XoopsModules\Xcaptcha\Form;
+use XoopsModules\Xcaptcha;
+
 include __DIR__ . '/header.php';
 
-$xoops = Xoops::getInstance();
+$xoops = \Xoops::getInstance();
+$xcaptchaHandler = new \XoopsModules\Xcaptcha\Captcha();
 
 switch ($op) {
     case 'save':
         if (!$xoops->security()->check()) {
             $xoops->redirect('index.php', 5, implode(',', $xoops->security()->getErrors()));
         }
-        if ($type === 'config') {
-            $config = $xcaptcha_handler->VerifyData();
-            $xcaptcha_handler->writeConfig('captcha.config', $config);
+        if ('config' === $type) {
+            $config = $xcaptchaHandler->VerifyData();
+            $xcaptchaHandler->writeConfig('captcha.config', $config);
             $xoops->redirect('index.php?type=config', 5, _AM_XCAPTCHA_SAVED);
         } else {
-            if ($xcaptcha_handler->loadPluginHandler($type)) {
-                $config = $xcaptcha_handler->Pluginhandler->VerifyData();
-                $xcaptcha_handler->writeConfig('captcha.config.' . $type, $config);
+            if ($xcaptchaHandler->loadPluginHandler($type)) {
+                $config = $xcaptchaHandler->Pluginhandler->VerifyData();
+                $xcaptchaHandler->writeConfig('captcha.config.' . $type, $config);
                 $xoops->redirect('index.php?type=' . $type, 5, _AM_XCAPTCHA_SAVED);
             }
         }
         break;
-
     case 'default':
     default:
         $type = isset($type) ? $type : 'config';
@@ -46,16 +49,21 @@ switch ($op) {
         $xoops->theme()->addStylesheet('modules/xcaptcha/css/moduladmin.css');
 
         $admin_page = new \Xoops\Module\Admin();
-        if ($type === 'config') {
+        if ('config' === $type) {
             $admin_page->displayNavigation('index.php?type=config');
             $admin_page->addInfoBox(_AM_XCAPTCHA_FORM);
-            $form = $xoops->getModuleForm($xcaptcha_handler, 'captcha', 'xcaptcha');
+            // $form = $xoops->getModuleForm($xcaptchaHandler, 'captcha', 'xcaptcha');
+
+            // $form = $helper->getForm($xcaptchaHandler, 'xcaptcha');
+            $form = new Form\CaptchaForm($xcaptchaHandler);
             $admin_page->addInfoBoxLine($form->render());
         } else {
-            if ($plugin = $xcaptcha_handler->loadPluginHandler($type)) {
-                $title = constant('_XCAPTCHA_FORM_' . strtoupper($type));
-                $form = $xoops->getModuleForm($plugin, $type, 'xcaptcha');
-                $admin_page->addInfoBox($title);
+            if ($plugin = $xcaptchaHandler->loadPluginHandler($type)) {
+                $title = constant('_XCAPTCHA_FORM_' . mb_strtoupper($type));
+//                $form  = $xoops->getModuleForm($plugin, $type, 'xcaptcha');
+                $class = 'XoopsModules\Xcaptcha\Form\\' . $type . 'Form';
+                         $form  = new $class($plugin);
+                             $admin_page->addInfoBox($title);
                 $admin_page->addInfoBoxLine($form->render());
             } else {
                 $xoops->redirect('index.php', 5, _AM_XCAPTCHA_ERROR);

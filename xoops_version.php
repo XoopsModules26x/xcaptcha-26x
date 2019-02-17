@@ -17,29 +17,29 @@
  * @version         $Id$
  */
 
-$modversion['name']        = _MI_XCAPTCHA_NAME;
-$modversion['description'] = _MI_XCAPTCHA_DESC;
-$modversion['version']     = 1.00;
-$modversion['author']      = 'Xoops Core Development Team';
-$modversion['nickname']    = 'Laurent JEN (aka DuGris)';
-$modversion['credits']     = 'The XOOPS Project';
-$modversion['license']     = 'GNU GPL 2.0';
-$modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html/';
-$modversion['official']    = 1;
-$modversion['help']        = 'page=help';
-$modversion['image']       = 'images/xcaptcha_logo.png';
-$modversion['dirname']     = 'xcaptcha';
+require_once __DIR__ . '/preloads/autoloader.php';
 
+$modversion['version']       = 1.00;
+$modversion['module_status'] = 'alpha';
+$modversion['release_date']  = '2019/02/10';
+$modversion['name']          = _MI_XCAPTCHA_NAME;
+$modversion['description']   = _MI_XCAPTCHA_DESC;
+$modversion['author']        = 'Xoops Core Development Team';
+$modversion['nickname']      = 'Laurent JEN (aka DuGris)';
+$modversion['credits']       = 'The XOOPS Project';
+$modversion['license']       = 'GNU GPL 2.0';
+$modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html/';
+$modversion['official']      = 1;
+$modversion['help']          = 'page=help';
+$modversion['image']         = 'images/xcaptcha_logo.png';
+$modversion['dirname']       = basename(__DIR__);
 //about
-$modversion['release_date']        = '2012/10/01';
 $modversion['module_website_url']  = 'dugris.xoofoo.org';
 $modversion['module_website_name'] = 'XooFoo.org - Laurent JEN';
-$modversion['module_status']       = 'alpha';
-$modversion['min_php']             = '5.3.7';
+$modversion['min_php']             = '7.1.0';
 $modversion['min_xoops']           = '2.6.0';
-
 // paypal
-$modversion['paypal']                  = array();
+$modversion['paypal']                  = [];
 $modversion['paypal']['business']      = 'xoopsfoundation@gmail.com';
 $modversion['paypal']['item_name']     = _MI_XCAPTCHA_DESC;
 $modversion['paypal']['amount']        = 0;

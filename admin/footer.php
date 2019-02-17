@@ -16,6 +16,5 @@
  * @author          Laurent JEN (Aka DuGris)
  * @version         $Id$
  */
-
-$xoops = Xoops::getInstance();
+$xoops = \Xoops::getInstance();
 $xoops->footer();

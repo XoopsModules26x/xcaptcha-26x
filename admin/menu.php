@@ -16,25 +16,23 @@
  * @author          Laurent JEN (Aka DuGris)
  * @version         $Id$
  */
-
 $cpt = 1;
 $adminmenu[$cpt]['title'] = _MI_XCAPTCHA_INDEX;
 $adminmenu[$cpt]['link'] = 'admin/index.php';
 $adminmenu[$cpt]['icon'] = 'home.png';
 
-static $xcaptcha_handler;
-if (!isset($xcaptcha_handler)) {
-    include_once dirname(__DIR__) . '/class/xcaptcha.php';
-    $xcaptcha_handler = new Xcaptcha();
+static $xcaptchaHandler;
+if (!isset($xcaptchaHandler)) {
+    $xcaptchaHandler = new \XoopsModules\Xcaptcha\Captcha();
 }
 
-$xoops = Xoops::getInstance();
+$xoops = \Xoops::getInstance();
 
-foreach ( array_keys($xcaptcha_handler->getPluginList()) as $key ) {
+foreach (array_keys($xcaptchaHandler->getPluginList()) as $key) {
     ++$cpt;
     $xoops->loadLanguage($key, 'xcaptcha');
 
-    $adminmenu[$cpt]['title'] = constant('_MI_XCAPTCHA_ADMENU_' . strtoupper($key) );
+    $adminmenu[$cpt]['title'] = constant('_MI_XCAPTCHA_ADMENU_' . mb_strtoupper($key));
     $adminmenu[$cpt]['link'] = 'admin/index.php?type=' . $key;
     $adminmenu[$cpt]['icon'] = 'administration.png';
 }

@@ -16,7 +16,6 @@
  * @author          Laurent JEN (Aka DuGris)
  * @version         $Id$
  */
-
 define('_MI_XCAPTCHA_NAME', 'Xcaptcha');
 define('_MI_XCAPTCHA_DESC', 'Xoops CAPTCHA configuration');
 

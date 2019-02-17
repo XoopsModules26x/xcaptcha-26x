@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Xcaptcha\Plugin;
+
 /**
  * Xcaptcha extension module
  * You may not change or alter any portion of this comment or credits
@@ -15,36 +18,31 @@
  * @author          Laurent JEN (Aka DuGris)
  * @version         $Id$
  */
-
-class XcaptchaImage extends Xcaptcha
+class Text extends \XoopsModules\Xcaptcha\Captcha
 {
-    public $config = array();
+    public $config = [];
 
     public $plugin;
 
     public function __construct()
     {
-        $this->xcaptcha_handler = Xcaptcha::getInstance();
-        $this->config = $this->xcaptcha_handler->loadConfig('image');
-        $this->plugin = 'image';
+        $this->xcaptchaHandler = \XoopsModules\Xcaptcha\Captcha::getInstance();
+        $this->config = $this->xcaptchaHandler->loadConfig('text');
+        $this->plugin = 'text';
     }
 
+    /**
+     * @return array
+     */
     public function VerifyData()
     {
-        $system = System::getInstance();
-        $config = array();
+        $system = \System::getInstance();
+        $config = [];
         $_POST['num_chars'] = $system->cleanVars($_POST, 'num_chars', 6, 'int');
-        $_POST['casesensitive'] = $system->cleanVars($_POST, 'casesensitive', false, 'boolean');
-        $_POST['fontsize_min'] = $system->cleanVars($_POST, 'fontsize_min', 10, 'int');
-        $_POST['fontsize_max'] = $system->cleanVars($_POST, 'fontsize_max', 24, 'int');
-        $_POST['background_type'] = $system->cleanVars($_POST, 'background_type', 0, 'int');
-        $_POST['background_num'] = $system->cleanVars($_POST, 'background_num', 50, 'int');
-        $_POST['polygon_point'] = $system->cleanVars($_POST, 'polygon_point', 3, 'int');
-        $_POST['skip_characters'] = $system->cleanVars($_POST, 'skip_characters', 'o|0|i|l|1', 'string');
-        $_POST['skip_characters'] = explode('|', $_POST['skip_characters']);
         foreach (array_keys($this->config) as $key) {
             $config[$key] = $_POST[$key];
         }
+
         return $config;
     }
 }

@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Xcaptcha\Form;
+
 /**
  * Xcaptcha module
  *
@@ -16,39 +19,38 @@
  * @author          Laurent JEN (Aka DuGris)
  * @version         $Id$
  */
-
-class XcaptchaRecaptchaForm extends Xoops\Form\ThemeForm
+class RecaptchaForm extends \Xoops\Form\ThemeForm
 {
     /**
-     * @param null $obj
+     * @param null|mixed $object
      */
     public function __construct($object = null)
     {
         $this->object = $object;
         $this->config = $object->config;
 
-        $xoops = Xoops::getInstance();
+        $xoops = \Xoops::getInstance();
 
         parent::__construct('', 'xcaptchaform', $xoops->getEnv('PHP_SELF'), 'post', true, 'horizontal');
 
-        $this->addElement(new Xoops\Form\TextArea(_XCAPTCHA_PRIVATE_KEY, 'private_key', $this->config['private_key'], 5, 50), true);
-        $this->addElement(new Xoops\Form\Textarea(_XCAPTCHA_PUBLIC_KEY, 'public_key', $this->config['public_key'], 5, 50), true);
+        $this->addElement(new \Xoops\Form\TextArea(_XCAPTCHA_PRIVATE_KEY, 'private_key', $this->config['private_key'], 5, 50), true);
+        $this->addElement(new \Xoops\Form\Textarea(_XCAPTCHA_PUBLIC_KEY, 'public_key', $this->config['public_key'], 5, 50), true);
 
-        $theme_form = new Xoops\Form\Select(_XCAPTCHA_THEME, 'theme', $this->config['theme'], $size = 4);
+        $theme_form = new \Xoops\Form\Select(_XCAPTCHA_THEME, 'theme', $this->config['theme'], $size = 4);
         $theme_form->addOptionArray($this->object->getThemes());
         $this->addElement($theme_form, false);
 
-        $lang_form = new Xoops\Form\Select(_XCAPTCHA_LANG, 'lang', $this->config['lang'], $size = 4);
+        $lang_form = new \Xoops\Form\Select(_XCAPTCHA_LANG, 'lang', $this->config['lang'], $size = 4);
         $lang_form->addOptionArray($this->object->getLanguages());
         $this->addElement($lang_form, false);
 
-        $this->addElement(new Xoops\Form\Hidden('type', 'recaptcha'));
+        $this->addElement(new \Xoops\Form\Hidden('type', 'recaptcha'));
 
-        $buttonTray = new Xoops\Form\ElementTray('', '');
-        $buttonTray->addElement(new Xoops\Form\Hidden('op', 'save'));
-        $buttonTray->addElement(new Xoops\Form\Button('', 'submit', XoopsLocale::A_SUBMIT, 'submit'));
-        $buttonTray->addElement(new Xoops\Form\Button('', 'reset', XoopsLocale::A_RESET, 'reset'));
-        $buttonCancelSend = new Xoops\Form\Button('', 'cancel', XoopsLocale::A_CANCEL, 'button');
+        $buttonTray = new \Xoops\Form\ElementTray('', '');
+        $buttonTray->addElement(new \Xoops\Form\Hidden('op', 'save'));
+        $buttonTray->addElement(new \Xoops\Form\Button('', 'submit', \XoopsLocale::A_SUBMIT, 'submit'));
+        $buttonTray->addElement(new \Xoops\Form\Button('', 'reset', \XoopsLocale::A_RESET, 'reset'));
+        $buttonCancelSend = new \Xoops\Form\Button('', 'cancel', \XoopsLocale::A_CANCEL, 'button');
         $buttonCancelSend->setExtra("onclick='javascript:history.go(-1);'");
         $buttonTray->addElement($buttonCancelSend);
 

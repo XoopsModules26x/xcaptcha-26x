@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Xcaptcha\Form;
+
 /**
  * Xcaptcha module
  *
@@ -16,30 +19,29 @@
  * @author          Laurent JEN (Aka DuGris)
  * @version         $Id$
  */
-
-class XcaptchaTextForm extends Xoops\Form\ThemeForm
+class TextForm extends \Xoops\Form\ThemeForm
 {
     /**
-     * @param null $obj
+     * @param null|mixed $object
      */
     public function __construct($object = null)
     {
         $this->object = $object;
         $this->config = $object->config;
 
-        $xoops = Xoops::getInstance();
+        $xoops = \Xoops::getInstance();
 
         parent::__construct('', 'xcaptchaform', $xoops->getEnv('PHP_SELF'), 'post', true, 'horizontal');
 
-        $this->addElement(new Xoops\Form\Text(_XCAPTCHA_NUM_CHARS, 'num_chars', 2, 2, $this->config['num_chars']), true);
+        $this->addElement(new \Xoops\Form\Text(_XCAPTCHA_NUM_CHARS, 'num_chars', 2, 2, $this->config['num_chars']), true);
 
-        $this->addElement(new Xoops\Form\Hidden('type', 'text'));
+        $this->addElement(new \Xoops\Form\Hidden('type', 'text'));
 
-        $buttonTray = new Xoops\Form\ElementTray('', '');
-        $buttonTray->addElement(new Xoops\Form\Hidden('op', 'save'));
-        $buttonTray->addElement(new Xoops\Form\Button('', 'submit', XoopsLocale::A_SUBMIT, 'submit'));
-        $buttonTray->addElement(new Xoops\Form\Button('', 'reset', XoopsLocale::A_RESET, 'reset'));
-        $buttonCancelSend = new Xoops\Form\Button('', 'cancel', XoopsLocale::A_CANCEL, 'button');
+        $buttonTray = new \Xoops\Form\ElementTray('', '');
+        $buttonTray->addElement(new \Xoops\Form\Hidden('op', 'save'));
+        $buttonTray->addElement(new \Xoops\Form\Button('', 'submit', \XoopsLocale::A_SUBMIT, 'submit'));
+        $buttonTray->addElement(new \Xoops\Form\Button('', 'reset', \XoopsLocale::A_RESET, 'reset'));
+        $buttonCancelSend = new \Xoops\Form\Button('', 'cancel', \XoopsLocale::A_CANCEL, 'button');
         $buttonCancelSend->setExtra("onclick='javascript:history.go(-1);'");
         $buttonTray->addElement($buttonCancelSend);
 

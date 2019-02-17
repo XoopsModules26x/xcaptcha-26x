@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Xcaptcha;
+
 /**
  * Xcaptcha extension module
  * You may not change or alter any portion of this comment or credits
@@ -13,84 +16,123 @@
  * @package         xcaptcha
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id$
  */
-
-class Xcaptcha extends XoopsCaptcha
+class Captcha extends \XoopsCaptcha
 {
     public $captchaHandler;
 
-    public $config = array();
+    public $config = [];
 
-    public $plugin_List = array();
+    public $plugin_List = [];
 
-    public $plugin_config = array();
+    public $plugin_config = [];
 
     public $xcaptcha_path_plugin;
 
     public function __construct()
     {
-        $this->captchaHandler = XoopsCaptcha::getInstance();
+        $this->captchaHandler = \XoopsCaptcha::getInstance();
         $this->config = $this->loadConfig();
         $this->plugin_List = $this->getPluginList();
         $this->plugin_config = $this->loadConfigPlugin();
-        $this->xcaptcha_path_plugin = \XoopsBaseConfig::get('root-path') . '/modules/xcaptcha/plugins';
+        $this->xcaptcha_path_plugin = \XoopsBaseConfig::get('root-path') . '/modules/xcaptcha/class/Plugin';
     }
 
-    static function getInstance()
+    /**
+     * @return mixed|\XoopsCaptcha
+     */
+    public static function getInstance()
     {
         static $instance;
         if (!isset($instance)) {
             $class = __CLASS__;
             $instance = new $class();
         }
+
         return $instance;
     }
 
+    /**
+     * @param string $name
+     * @return array
+     */
     public function loadConfig($name = 'config')
     {
         return $this->captchaHandler->loadConfig($name);
     }
 
+    /**
+     * @param null $filename
+     * @return array
+     */
     public function loadBasicConfig($filename = null)
     {
         return $this->captchaHandler->loadBasicConfig($filename);
     }
 
+    /**
+     * @param string $file
+     * @return array
+     */
     public function readConfig($file = 'config')
     {
         return $this->captchaHandler->readConfig($file);
     }
 
-    public function writeConfig($file = 'config', $data)
+    /**
+     * XoopsCaptcha::writeConfig()
+     *
+     * @param string $filename
+     * @param array $config
+     *
+     * @return array
+     */
+
+    /**
+     * @param string $filename
+     * @param array  $config
+     * @return array
+     */
+    public function writeConfig($filename = 'config', $config)
     {
-        return $this->captchaHandler->writeConfig($file, $data);
+        return $this->captchaHandler->writeConfig($filename, $config);
     }
 
+    /**
+     * @return array
+     */
     public function getPluginList()
     {
-        $ret = array();
+        $ret = [];
 
         foreach (glob($this->captchaHandler->path_basic . '/config.*.php') as $filename) {
             $plugin_List = preg_replace('/(config\.)(.*)(\.php)/', '$2', basename($filename));
             $ret[$plugin_List] = $plugin_List;
         }
+
         return $ret;
     }
 
+    /**
+     * @return array
+     */
     public function loadConfigPlugin()
     {
-        $config = array();
+        $config = [];
         foreach ($this->plugin_List as $key) {
             $config = $this->loadConfig($key);
         }
+
         return $config;
     }
 
+    /**
+     * @return array
+     */
     public function VerifyData()
     {
-        $system = System::getInstance();
-        $config = array();
+        $system = \System::getInstance();
+        $config = [];
         $_POST['disabled'] = $system->cleanVars($_POST, 'disabled', false, 'boolean');
         $_POST['mode'] = $system->cleanVars($_POST, 'mode', 'image', 'string');
         $_POST['name'] = $system->cleanVars($_POST, 'name', 'xoopscaptcha', 'string');
@@ -99,18 +141,25 @@ class Xcaptcha extends XoopsCaptcha
         foreach (array_keys($this->config) as $key) {
             $config[$key] = $_POST[$key];
         }
+
         return $config;
     }
 
+    /**
+     * @param null $name
+     * @return |null
+     */
     public function loadPluginHandler($name = null)
     {
         $name = empty($name) ? 'text' : $name;
-        $class = 'Xcaptcha' . ucfirst($name);
+//        $class = 'Xcaptcha' . ucfirst($name);
+        $class = 'XoopsModules\Xcaptcha\Plugin\\' . ucfirst($name);
         $this->Pluginhandler = null;
-        if (XoopsLoad::fileExists($file = $this->xcaptcha_path_plugin . '/' . $name . '.php')) {
-            require_once $file;
+        if (\XoopsLoad::fileExists($file = $this->xcaptcha_path_plugin . '/' . $name . '.php')) {
+//            require_once $file;
             $this->Pluginhandler = new $class($this);
         }
+
         return $this->Pluginhandler;
     }
 }

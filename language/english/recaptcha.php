@@ -16,7 +16,6 @@
  * @author          Laurent JEN (Aka DuGris)
  * @version         $Id$
  */
-
 define('_MI_XCAPTCHA_ADMENU_RECAPTCHA', 'Recaptcha');
 
 if (!defined('_XCAPTCHA_RECAPTCHA')) {
