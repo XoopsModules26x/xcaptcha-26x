@@ -8,12 +8,12 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       2010-2014 XOOPS Project (http://xoops.org)
+ * @copyright       2010-2014 XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package         Xcaptcha
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id$
+
  */
 use Xoops\Core\PreloadItem;
 
@@ -22,7 +22,7 @@ use Xoops\Core\PreloadItem;
  *
  * @package   Xcaptcha
  * @author    trabis <lusopoemas@gmail.com>
- * @copyright 2010-2014 XOOPS Project (http://xoops.org)
+ * @copyright 2010-2014 XOOPS Project (https://xoops.org)
  * @license   GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  */
 class XcaptchaPreload extends PreloadItem

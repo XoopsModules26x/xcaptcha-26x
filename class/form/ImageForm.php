@@ -12,12 +12,12 @@ namespace XoopsModules\Xcaptcha\Form;
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       XOOPS Project (http://xoops.org)
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package         Xcaptcha
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id$
+
  */
 class ImageForm extends \Xoops\Form\ThemeForm
 {
