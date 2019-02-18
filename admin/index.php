@@ -13,11 +13,9 @@
  * @package         xcaptcha
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
-
  */
-
-use XoopsModules\Xcaptcha\Form;
 use XoopsModules\Xcaptcha;
+use XoopsModules\Xcaptcha\Form;
 
 include __DIR__ . '/header.php';
 
@@ -62,8 +60,8 @@ switch ($op) {
                 $title = constant('_XCAPTCHA_FORM_' . mb_strtoupper($type));
 //                $form  = $xoops->getModuleForm($plugin, $type, 'xcaptcha');
                 $class = 'XoopsModules\Xcaptcha\Form\\' . $type . 'Form';
-                         $form  = new $class($plugin);
-                             $admin_page->addInfoBox($title);
+                $form = new $class($plugin);
+                $admin_page->addInfoBox($title);
                 $admin_page->addInfoBoxLine($form->render());
             } else {
                 $xoops->redirect('index.php', 5, _AM_XCAPTCHA_ERROR);

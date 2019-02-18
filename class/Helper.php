@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Xcaptcha;
+<?php
+
+namespace XoopsModules\Xcaptcha;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,17 +18,12 @@
  * @package         Xcaptcha
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
-
  */
-
 use Xoops\Module\Helper\HelperAbstract;
-use XoopsLoad;
 use XoopsModules\Xcaptcha;
-
 
 class Helper extends HelperAbstract
 {
-
     /**
      * @return \Xoops\Module\Helper\HelperAbstract
      */

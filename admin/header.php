@@ -14,11 +14,7 @@
  * @package         xcaptcha
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
-
  */
-
-use Xoops\Core\Request;
-
 require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
 $op = '';

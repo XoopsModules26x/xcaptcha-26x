@@ -17,7 +17,6 @@ namespace XoopsModules\Xcaptcha\Form;
  * @package         Xcaptcha
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
-
  */
 class CaptchaForm extends \Xoops\Form\ThemeForm
 {

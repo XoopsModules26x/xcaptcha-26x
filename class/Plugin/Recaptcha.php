@@ -16,7 +16,6 @@ namespace XoopsModules\Xcaptcha\Plugin;
  * @package         xcaptcha
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
-
  */
 class Recaptcha extends \XoopsModules\Xcaptcha\Captcha
 {

@@ -26,8 +26,8 @@ class Text extends \XoopsModules\Xcaptcha\Captcha
     public function __construct()
     {
         $this->xcaptchaHandler = \XoopsModules\Xcaptcha\Captcha::getInstance();
-        $this->config          = $this->xcaptchaHandler->loadConfig('text');
-        $this->plugin          = 'text';
+        $this->config = $this->xcaptchaHandler->loadConfig('text');
+        $this->plugin = 'text';
     }
 
     /**
@@ -35,8 +35,8 @@ class Text extends \XoopsModules\Xcaptcha\Captcha
      */
     public function VerifyData()
     {
-        $system             = \System::getInstance();
-        $config             = [];
+        $system = \System::getInstance();
+        $config = [];
         $_POST['num_chars'] = $system->cleanVars($_POST, 'num_chars', 6, 'int');
         foreach (array_keys($this->config) as $key) {
             $config[$key] = $_POST[$key];

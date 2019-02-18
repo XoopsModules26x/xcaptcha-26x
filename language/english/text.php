@@ -14,7 +14,6 @@
  * @package         xcaptcha
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
-
  */
 define('_MI_XCAPTCHA_ADMENU_TEXT', 'Text');
 

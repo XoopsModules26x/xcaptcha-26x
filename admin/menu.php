@@ -14,7 +14,6 @@
  * @package         xcaptcha
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
-
  */
 $cpt = 1;
 $adminmenu[$cpt]['title'] = _MI_XCAPTCHA_INDEX;

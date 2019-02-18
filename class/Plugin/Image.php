@@ -1,6 +1,7 @@
 <?php
 
 namespace XoopsModules\Xcaptcha\Plugin;
+
 /**
  * Xcaptcha extension module
  * You may not change or alter any portion of this comment or credits
@@ -15,7 +16,6 @@ namespace XoopsModules\Xcaptcha\Plugin;
  * @package         xcaptcha
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
-
  */
 class Image extends \XoopsModules\Xcaptcha\Captcha
 {
